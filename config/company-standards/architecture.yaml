@@ -1,0 +1,4 @@
+backend_pattern: "hexagonal"
+data_access_pattern: "repository"
+communication_pattern: "event-driven"
+api_versioning: true

@@ -1,0 +1,17 @@
+language_defaults:
+  typescript:
+    style_guide: "airbnb"
+    max_line_length: 100
+    prefer_const: true
+  python:
+    style_guide: "PEP8"
+    max_line_length: 88
+
+naming_conventions:
+  files: "kebab-case"
+  classes: "PascalCase"
+  functions: "camelCase"
+  constants: "UPPER_SNAKE_CASE"
+
+max_file_length: 300
+documentation_requirements: "All public functions must have JSDoc/docstring"

@@ -1,0 +1,4 @@
+min_coverage: 80
+required_test_types: ["unit", "integration"]
+e2e_required_for: ["critical_user_flows"]
+test_file_location: "alongside source files"

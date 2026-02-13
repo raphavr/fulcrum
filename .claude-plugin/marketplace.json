@@ -1,0 +1,15 @@
+{
+  "name": "fulcrum",
+  "description": "Fulcrum — Enterprise software delivery plugin",
+  "owner": {
+    "name": "Platform Team"
+  },
+  "plugins": [
+    {
+      "name": "fulcrum",
+      "description": "Fulcrum — Enterprise software delivery plugin: TDD, systematic debugging, spec-driven development, company standards, metrics collection, and compound learning",
+      "version": "1.0.0",
+      "source": "./"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+plugins/**/[0-9]*.[0-9]*.[0-9]* # Versioned plugin directories created by Claude Code
+
+# OS Files (macOS)
+.DS_Store # Common macOS system file
+.AppleDouble
+.LSOverride
+# Thumbnails
+._*
+# Hidden files and directories
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+# Project files
+*.xcodeproj
+.idea/ # Common IDE files
+.vscode/
+
+# Local Environment Variables and Logs
+.env
+.env.local
+*.log
+npm-debug.log*
+
+# Claude Code specific files
+.claude/settings.local.json # Automatically ignored by Claude Code by default
+.claude/commands/ # If you want to ignore personal commands not shared with team
+

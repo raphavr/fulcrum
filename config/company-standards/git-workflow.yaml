@@ -1,0 +1,4 @@
+branch_naming: "{brief-description}"
+commit_format: "{description}"
+merge_strategy: "squash"
+min_reviewers: 1

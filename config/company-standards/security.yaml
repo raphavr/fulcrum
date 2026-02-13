@@ -1,0 +1,4 @@
+no_hardcoded_secrets: true
+input_validation: "required"
+parameterized_queries: "required"
+auth_required: "all_non_public_endpoints"
