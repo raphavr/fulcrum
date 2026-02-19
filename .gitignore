@@ -27,3 +27,6 @@ npm-debug.log*
 .claude/settings.local.json # Automatically ignored by Claude Code by default
 .claude/commands/ # If you want to ignore personal commands not shared with team
 
+# Subagent session debriefs — local compound learning only, not for the repo
+docs/session-notes/
+

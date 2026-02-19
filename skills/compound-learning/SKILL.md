@@ -40,7 +40,9 @@ Identify the most recently completed cycle by examining:
 
 4. **Files changed** — Run `git diff --stat` against the base branch to see what was actually modified.
 
-5. **Cycle context summary:**
+5. **Session notes** — Check `docs/session-notes/` for debrief files left by subagent implementers. These capture gotchas, false starts, and decisions that never appear in commits. Read all notes from this cycle (match by task name or recency). These are the richest source of learnings — don't skip them.
+
+6. **Cycle context summary:**
    - What was the goal? (from spec, commits, or ask the engineer)
    - What was the estimated complexity?
    - What was actually implemented?

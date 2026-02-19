@@ -67,6 +67,32 @@ Task tool (general-purpose):
 
     If you find issues during self-review, fix them now before reporting.
 
+    ## Before Reporting Back: Session Debrief
+
+    Write a brief debrief to `docs/session-notes/task-N-[task-slug].md` (create the directory if needed).
+    This file is gitignored — it's for local compound learning only, not for the repo.
+
+    Cover only what actually happened — skip sections where there's nothing notable:
+
+    ```markdown
+    # Task N: [task name]
+
+    ## Gotchas
+    [Problems hit and how you resolved them. Skip if nothing notable.]
+
+    ## False Starts
+    [Approaches tried and abandoned, and why. Skip if you went straight to the solution.]
+
+    ## Decisions
+    [Non-obvious choices made and the reasoning. Skip if everything was straightforward.]
+
+    ## Surprises
+    [Anything unexpected about the codebase, requirements, or tools. Skip if none.]
+    ```
+
+    If there's genuinely nothing to note (clean task, no surprises), write the file with a single line:
+    `No notable findings.`
+
     ## Report Format
 
     When done, report:
