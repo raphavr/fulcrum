@@ -17,7 +17,10 @@ A Claude Code plugin for enterprise software delivery teams. Combines [Superpowe
 
 ## Installation
 
+Fulcrum is not listed in the Anthropic marketplace. Install it by pointing Claude Code at this repo as a custom marketplace:
+
 ```bash
+/plugin marketplace add https://github.com/raphavr/fulcrum
 /plugin install fulcrum
 /quit   # restart Claude Code
 /help   # confirm /spec and /compound appear
