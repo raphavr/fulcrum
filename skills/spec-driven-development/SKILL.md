@@ -30,7 +30,7 @@ digraph when_to_use {
 
 **When NOT to use:**
 - Trivial changes (typo fixes, one-line changes) → just do it directly
-- When a spec already exists and is approved → go straight to `superpowers:writing-plans`
+- When a spec already exists and is approved → go straight to `fulcrum:writing-plans`
 
 ---
 
@@ -164,7 +164,7 @@ Once the spec is approved, delegate immediately to the standard planning skill:
 
 > "Spec approved. Moving to plan generation."
 
-**REQUIRED SUB-SKILL:** Use `superpowers:writing-plans` to generate the implementation plan from the approved spec document.
+**REQUIRED SUB-SKILL:** Use `fulcrum:writing-plans` to generate the implementation plan from the approved spec document.
 
 Pass the spec file path as context so writing-plans can reference it directly.
 
@@ -187,7 +187,7 @@ When the implementation is complete, update the spec status from `Approved` to `
 ## Integration
 
 - **REQUIRED:** Use `fulcrum:enterprise-context` during spec generation to incorporate company standards
-- **DELEGATES TO:** `superpowers:writing-plans` immediately after spec approval (Phase 2)
+- **DELEGATES TO:** `fulcrum:writing-plans` immediately after spec approval (Phase 2)
 - **FEEDS INTO:** `fulcrum:compound-learning` for post-cycle knowledge capture
 
 ---

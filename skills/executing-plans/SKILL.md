@@ -24,7 +24,7 @@ git branch --show-current
 ```
 
 **If on main/master or no worktree exists:**
-- **REQUIRED SUB-SKILL:** Use `superpowers:using-git-worktrees` to create an isolated workspace
+- **REQUIRED SUB-SKILL:** Use `fulcrum:using-git-worktrees` to create an isolated workspace
 - Do not proceed until in a feature branch worktree
 
 **If already in a feature branch:** Continue to Step 1.
@@ -60,7 +60,7 @@ Based on feedback:
 
 After all tasks complete and verified:
 - Announce: "I'm using the finishing-a-development-branch skill to complete this work."
-- **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch
+- **REQUIRED SUB-SKILL:** Use fulcrum:finishing-a-development-branch
 - Follow that skill to verify tests, present options, execute choice
 
 ## When to Stop and Ask for Help
@@ -93,6 +93,6 @@ After all tasks complete and verified:
 ## Integration
 
 **Required workflow skills:**
-- **superpowers:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
-- **superpowers:writing-plans** - Creates the plan this skill executes
-- **superpowers:finishing-a-development-branch** - Complete development after all tasks
+- **fulcrum:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
+- **fulcrum:writing-plans** - Creates the plan this skill executes
+- **fulcrum:finishing-a-development-branch** - Complete development after all tasks

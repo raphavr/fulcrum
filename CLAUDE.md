@@ -39,8 +39,7 @@ This is a unified Claude Code plugin that combines Superpowers' core skills libr
 
 - Skill descriptions MUST start with "Use when..." — triggering conditions only, never workflow summary
 - Commands are thin wrappers — one line delegating to a skill
-- Cross-reference upstream skills as `superpowers:skill-name`
-- Cross-reference enterprise skills as `fulcrum:skill-name`
+- Cross-reference all skills as `fulcrum:skill-name`
 - Hooks use `${CLAUDE_PLUGIN_ROOT}` for portable path resolution
 
 ## Metrics State Files

@@ -152,7 +152,7 @@ If a learning overlaps with an existing one:
 - **FED BY:** `fulcrum:spec-driven-development` — specs provide the original intent for comparison
 - **UPDATES:** `CLAUDE.md` — project rules and guidelines
 - **UPDATES:** `.claude/project-config.md` — project-specific standards (with engineer approval)
-- **WORKS WITH:** `superpowers:finishing-a-development-branch` — natural point to suggest running `/compound`
+- **WORKS WITH:** `fulcrum:finishing-a-development-branch` — natural point to suggest running `/compound`
 
 ## Verification Checklist
 

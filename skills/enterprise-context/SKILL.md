@@ -117,8 +117,8 @@ Project overrides applied: [architecture.communication_pattern]
 ## Integration
 
 - **USED BY:** `fulcrum:spec-driven-development` during spec generation
-- **USED BY:** `superpowers:writing-plans` during plan generation
-- **USED BY:** `superpowers:requesting-code-review` during code review
+- **USED BY:** `fulcrum:writing-plans` during plan generation
+- **USED BY:** `fulcrum:requesting-code-review` during code review
 - **STANDALONE:** Responds to direct questions about company standards
 
 ## Verification Checklist
