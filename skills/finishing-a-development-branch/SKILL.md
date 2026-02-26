@@ -149,6 +149,14 @@ git worktree remove <worktree-path>
 
 **For Option 3:** Keep worktree.
 
+### Step 6: Suggest Compound Learning
+
+After completing the workflow (any option), offer once — do not nag:
+
+> "Want to capture learnings from this cycle? Run `/compound` to record patterns, gotchas, and decisions for future work."
+
+If the engineer declines or doesn't respond, move on.
+
 ## Quick Reference
 
 | Option | Merge | Push | Keep Worktree | Cleanup Branch |
@@ -198,3 +206,4 @@ git worktree remove <worktree-path>
 
 **Pairs with:**
 - **using-git-worktrees** - Cleans up worktree created by that skill
+- **fulcrum:compound-learning** - Suggested at Step 6 after branch is finished

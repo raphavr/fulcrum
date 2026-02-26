@@ -28,6 +28,33 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 - "Run the tests and make sure they pass" - step
 - "Commit" - step
 
+## Pre-flight Check
+
+Before writing any tasks, verify the required standards are documented and available. **Do not proceed if either is missing.**
+
+### 1. Test patterns — from `CLAUDE.md`
+
+Read the project's `CLAUDE.md`. It must document:
+- The exact command to run tests
+- How test files are named and where they live
+- The test structure/pattern to follow
+
+**If CLAUDE.md doesn't exist or doesn't document test patterns:**
+> ⚠ Cannot write plan: `CLAUDE.md` is missing test patterns (test command, file location, test structure). Add them to `CLAUDE.md` before proceeding.
+
+Stop. Do not continue.
+
+### 2. Commit convention — from enterprise context
+
+`fulcrum:enterprise-context` must have been loaded for the plan phase (includes `git-workflow.yaml`). It provides `commit_format`.
+
+**If enterprise context was not loaded or `commit_format` is absent:**
+> ⚠ Cannot write plan: git-workflow standards are not available. Ensure `fulcrum:enterprise-context` ran successfully for the plan phase.
+
+Stop. Do not continue.
+
+---
+
 ## Plan Document Header
 
 **Every plan MUST start with this header:**
@@ -52,48 +79,47 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 ### Task N: [Component Name]
 
 **Files:**
-- Create: `exact/path/to/file.py`
-- Modify: `exact/path/to/existing.py:123-145`
-- Test: `tests/exact/path/to/test.py`
+- Create: `exact/path/to/new-file`
+- Modify: `exact/path/to/existing-file:123-145`
+- Test: `exact/path/to/test-file` ← location per CLAUDE.md
 
 **Step 1: Write the failing test**
 
-```python
-def test_specific_behavior():
-    result = function(input)
-    assert result == expected
-```
+In `exact/path/to/test-file`, add:
+
+[Complete test code following the test structure documented in CLAUDE.md]
 
 **Step 2: Run test to verify it fails**
 
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: FAIL with "function not defined"
+Run: `[test command from CLAUDE.md, scoped to this file/test]`
+Expected: FAIL — "[specific error that confirms the test is wired correctly, not a syntax error]"
 
 **Step 3: Write minimal implementation**
 
-```python
-def function(input):
-    return expected
-```
+In `exact/path/to/new-file`, add:
+
+[Complete implementation following the coding standards in CLAUDE.md and enterprise-context.
+Only what makes this test pass — no speculative code.]
 
 **Step 4: Run test to verify it passes**
 
-Run: `pytest tests/path/test.py::test_name -v`
+Run: `[same command as Step 2]`
 Expected: PASS
 
 **Step 5: Commit**
 
 ```bash
-git add tests/path/test.py src/path/file.py
-git commit -m "feat: add specific feature"
+git add exact/path/to/test-file exact/path/to/new-file
+git commit -m "[commit message using commit_format from git-workflow.yaml]"
 ```
 ```
 
 ## Remember
-- Exact file paths always
-- Complete code in plan (not "add validation")
-- Exact commands with expected output
-- Reference relevant skills with @ syntax
+- Exact file paths always — no generic placeholders
+- Complete code in every step — not "add validation here" but the actual code
+- Test command and structure come from `CLAUDE.md` — never infer from existing code
+- Coding standards come from `CLAUDE.md` and enterprise-context — never infer from existing code
+- Commit format comes from enterprise git-workflow — never invent one
 - DRY, YAGNI, TDD, frequent commits
 
 ## Execution Handoff

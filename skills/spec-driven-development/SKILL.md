@@ -160,63 +160,13 @@ Append to .claude/workflow-state.jsonl: {"stage":"spec","action":"completed","ti
 
 ## Phase 2: Plan Generation
 
-Once the spec is approved, bridge to the standard planning pipeline.
+Once the spec is approved, delegate immediately to the standard planning skill:
 
-### Step 1: Transform Spec to Plan
+> "Spec approved. Moving to plan generation."
 
-Convert the approved spec into a Superpowers-compatible implementation plan:
+**REQUIRED SUB-SKILL:** Use `superpowers:writing-plans` to generate the implementation plan from the approved spec document.
 
-1. Break requirements into tasks following Superpowers conventions:
-   - Each task takes 2-5 minutes
-   - Each task is TDD-oriented (write test first, then implement)
-   - Each task is clear enough for a subagent to execute independently
-   - Each task references the spec requirement it fulfills
-
-2. Order tasks by dependency — what must be built first?
-
-3. Group tasks into batches that can be reviewed together.
-
-### Step 2: Present Plan
-
-Present the plan following the standard `superpowers:writing-plans` approval flow. The engineer reviews and approves the plan before any code is written.
-
-After saving the plan to `docs/plans/YYYY-MM-DD-<feature-name>.md`, offer the execution choice:
-
-> "Plan complete. Two execution options:
-> 1. **Subagent-Driven (this session)** — I dispatch a fresh subagent per task, review between tasks
-> 2. **Parallel Session (separate)** — Open a new session with /execute-plan, batch execution with checkpoints
->
-> Which approach?"
-
-**Record the stage transition:**
-```
-Append to .claude/workflow-state.jsonl: {"stage":"plan","action":"entered","timestamp":"<ISO8601>"}
-```
-When the plan is approved:
-```
-Append to .claude/workflow-state.jsonl: {"stage":"plan","action":"completed","timestamp":"<ISO8601>"}
-```
-
----
-
-## Phase 3: Execution
-
-Once the plan is approved, execution follows the standard Superpowers pipeline:
-
-1. **Git worktree creation** — Use `superpowers:using-git-worktrees` if not already in a worktree
-2. **Subagent-driven development** — Use `superpowers:subagent-driven-development` to execute the plan
-3. **TDD enforcement** — Each task follows `superpowers:test-driven-development`
-4. **Code review between tasks** — Use `superpowers:requesting-code-review`
-5. **Verification before completion** — Use `superpowers:verification-before-completion`
-
-**Record the stage transition:**
-```
-Append to .claude/workflow-state.jsonl: {"stage":"implement","action":"entered","timestamp":"<ISO8601>"}
-```
-When implementation is complete:
-```
-Append to .claude/workflow-state.jsonl: {"stage":"implement","action":"completed","timestamp":"<ISO8601>"}
-```
+Pass the spec file path as context so writing-plans can reference it directly.
 
 ---
 
@@ -237,10 +187,7 @@ When the implementation is complete, update the spec status from `Approved` to `
 ## Integration
 
 - **REQUIRED:** Use `fulcrum:enterprise-context` during spec generation to incorporate company standards
-- **BRIDGES TO:** `superpowers:writing-plans` conventions for plan generation (Phase 2)
-- **DELEGATES TO:** `superpowers:subagent-driven-development` for execution (Phase 3)
-- **WORKS WITH:** `superpowers:test-driven-development` for TDD enforcement during execution
-- **WORKS WITH:** `superpowers:using-git-worktrees` for branch isolation
+- **DELEGATES TO:** `superpowers:writing-plans` immediately after spec approval (Phase 2)
 - **FEEDS INTO:** `fulcrum:compound-learning` for post-cycle knowledge capture
 
 ---

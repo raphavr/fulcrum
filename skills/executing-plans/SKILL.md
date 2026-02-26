@@ -15,6 +15,20 @@ Load plan, review critically, execute tasks in batches, report for review betwee
 
 ## The Process
 
+### Step 0: Verify Worktree
+
+**Before touching any code, verify you are NOT on main/master:**
+
+```bash
+git branch --show-current
+```
+
+**If on main/master or no worktree exists:**
+- **REQUIRED SUB-SKILL:** Use `superpowers:using-git-worktrees` to create an isolated workspace
+- Do not proceed until in a feature branch worktree
+
+**If already in a feature branch:** Continue to Step 1.
+
 ### Step 1: Load and Review Plan
 1. Read plan file
 2. Review critically - identify any questions or concerns about the plan
