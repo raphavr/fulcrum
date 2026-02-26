@@ -64,6 +64,10 @@ Use the goal as established in Phase 0 (or from the user's initial prompt if wel
 
 ### Step 2: Codebase Analysis
 
+**Record stage entry (reinitialize state file for new feature cycle):**
+Overwrite `.claude/workflow-state.jsonl` with a single line:
+`{"stage":"spec","action":"entered","timestamp":"<ISO8601>"}`
+
 Before writing anything, analyze the existing codebase to ground the spec in reality:
 
 1. **Impact analysis** — Identify which files and modules are likely affected. Use glob and grep to find relevant code. Check imports, dependencies, and call sites.
@@ -147,11 +151,7 @@ The engineer can:
 
 Continue iterating until the engineer explicitly approves the spec. When approved, update the spec status to `Approved`.
 
-**Record the stage transition:**
-```
-Append to .claude/workflow-state.jsonl: {"stage":"spec","action":"entered","timestamp":"<ISO8601>"}
-```
-When the spec is approved:
+**Record stage completion:**
 ```
 Append to .claude/workflow-state.jsonl: {"stage":"spec","action":"completed","timestamp":"<ISO8601>"}
 ```

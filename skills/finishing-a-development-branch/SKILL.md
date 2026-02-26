@@ -48,6 +48,9 @@ Or ask: "This branch split from main - is that correct?"
 
 ### Step 3: Present Options
 
+**Record stage entry:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"finish","action":"entered","timestamp":"<ISO8601>"}`
+
 Present exactly these 4 options:
 
 ```
@@ -132,6 +135,9 @@ git branch -D <feature-branch>
 ```
 
 Then: Cleanup worktree (Step 5)
+
+**Record stage completion:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"finish","action":"completed","timestamp":"<ISO8601>"}`
 
 ### Step 5: Cleanup Worktree
 

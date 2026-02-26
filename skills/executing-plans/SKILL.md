@@ -38,6 +38,9 @@ git branch --show-current
 ### Step 2: Execute Batch
 **Default: First 3 tasks**
 
+**Record stage entry:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"implement","action":"entered","timestamp":"<ISO8601>"}`
+
 For each task:
 1. Mark as in_progress
 2. Follow each step exactly (plan has bite-sized steps)
@@ -57,6 +60,9 @@ Based on feedback:
 - Repeat until complete
 
 ### Step 5: Complete Development
+
+**Record stage completion:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"implement","action":"completed","timestamp":"<ISO8601>"}`
 
 After all tasks complete and verified:
 - Announce: "I'm using the finishing-a-development-branch skill to complete this work."

@@ -76,8 +76,10 @@ state_dir.mkdir(parents=True, exist_ok=True)
     )
 )
 
-# Initialize empty state file for stage transitions
-(state_dir / "workflow-state.jsonl").write_text("")
+# Initialize state file for stage transitions (preserve across sessions in same feature cycle)
+state_file = state_dir / "workflow-state.jsonl"
+if not state_file.exists():
+    state_file.write_text("")
 
 try:
     send_event(

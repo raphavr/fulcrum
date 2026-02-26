@@ -13,6 +13,9 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
+**Record stage entry:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"plan","action":"entered","timestamp":"<ISO8601>"}`
+
 **Enterprise context:** Invoke `fulcrum:enterprise-context` for the plan phase (testing + git-workflow standards).
 
 **Context:** This should be run in a dedicated worktree (created by /spec or using-git-worktrees skill).
@@ -125,6 +128,9 @@ git commit -m "[commit message using commit_format from git-workflow.yaml]"
 ## Execution Handoff
 
 After saving the plan, offer execution choice:
+
+**Record stage completion:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"plan","action":"completed","timestamp":"<ISO8601>"}`
 
 **"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
 

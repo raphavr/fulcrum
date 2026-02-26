@@ -35,6 +35,9 @@ HEAD_SHA=$(git rev-parse HEAD)
 
 **2. Dispatch code-reviewer subagent:**
 
+**Record stage entry:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"review","action":"entered","timestamp":"<ISO8601>"}`
+
 Use Task tool with fulcrum:code-reviewer type, fill template at `code-reviewer.md`
 
 **Placeholders:**
@@ -49,6 +52,9 @@ Use Task tool with fulcrum:code-reviewer type, fill template at `code-reviewer.m
 - Fix Important issues before proceeding
 - Note Minor issues for later
 - Push back if reviewer is wrong (with reasoning)
+
+**Record stage completion:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"review","action":"completed","timestamp":"<ISO8601>"}`
 
 ## Example
 

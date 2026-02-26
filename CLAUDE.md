@@ -50,7 +50,16 @@ Skills write stage transitions to `.claude/workflow-state.jsonl`:
 {"stage":"spec","action":"completed","timestamp":"<ISO8601>"}
 ```
 
-Valid stages: `spec`, `plan`, `implement`, `review`, `finish`
+Valid stages and which skill writes them:
+| Stage     | Written by                                                              |
+|-----------|-------------------------------------------------------------------------|
+| spec      | spec-driven-development (reinitializes file at Phase 1 start)          |
+| plan      | writing-plans                                                           |
+| implement | executing-plans OR subagent-driven-development                          |
+| review    | requesting-code-review OR subagent-driven-development (final reviewer)  |
+| finish    | finishing-a-development-branch                                          |
+
+Note: `spec-driven-development` overwrites the file at Phase 1 start (new feature cycle). All other skills append.
 
 ## Company Standards
 

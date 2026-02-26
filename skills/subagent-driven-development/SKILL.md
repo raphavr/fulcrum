@@ -39,6 +39,9 @@ digraph when_to_use {
 
 **Enterprise context:** Invoke `fulcrum:enterprise-context` for the implement phase (coding standards) before dispatching any subagents.
 
+**Record stage entry:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"implement","action":"entered","timestamp":"<ISO8601>"}`
+
 ```dot
 digraph process {
     rankdir=TB;
@@ -79,10 +82,23 @@ digraph process {
     "Code quality reviewer subagent approves?" -> "Mark task complete in TodoWrite" [label="yes"];
     "Mark task complete in TodoWrite" -> "More tasks remain?";
     "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="yes"];
-    "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="no"];
-    "Dispatch final code reviewer subagent for entire implementation" -> "Use fulcrum:finishing-a-development-branch";
+    "More tasks remain?" -> "Record implement:completed + review:entered" [label="no"];
+    "Record implement:completed + review:entered" -> "Dispatch final code reviewer subagent for entire implementation";
+    "Dispatch final code reviewer subagent for entire implementation" -> "Record review:completed";
+    "Record review:completed" -> "Use fulcrum:finishing-a-development-branch";
 }
 ```
+
+## Stage Transition Instructions
+
+When all tasks are done, before dispatching the final reviewer:
+**Record implement completion + review entry:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"implement","action":"completed","timestamp":"<ISO8601>"}`
+Append to `.claude/workflow-state.jsonl`: `{"stage":"review","action":"entered","timestamp":"<ISO8601>"}`
+
+After the final code reviewer approves (before transitioning to finishing-a-development-branch):
+**Record review completion:**
+Append to `.claude/workflow-state.jsonl`: `{"stage":"review","action":"completed","timestamp":"<ISO8601>"}`
 
 ## Prompt Templates
 
