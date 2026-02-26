@@ -2,18 +2,20 @@
 
 A Claude Code plugin for enterprise software delivery teams. Combines [Superpowers](https://github.com/obra/superpowers) core skills with enterprise extensions for structured workflows, company standards, metrics, and continuous learning.
 
-## What's included
+## The delivery pipeline
 
-### Core skills (from Superpowers)
-- **`/write-plan`** — Detailed implementation planning with bite-sized tasks (use when requirements are already clear)
-- **`/execute-plan`** — Multi-session plan execution with review checkpoints
-- TDD, systematic debugging, code review, git worktrees, verification, branch finishing
+Every feature follows the same four-stage flow:
 
-### Enterprise extensions (new)
-- **`/spec`** — Adaptive entry point for all feature work: dialogue for vague ideas, straight to analysis for well-defined tasks. Always produces a spec artifact → plan → execute
-- **Enterprise context** — Automatically injects company coding standards, architecture patterns, and security requirements at the right phase (spec/plan/implement/review)
-- **`/compound`** — Capture learnings from completed cycles into `docs/learnings/` and `CLAUDE.md`
-- **Metrics hooks** — Collect session-level workflow data (duration, stages, commits, outcome)
+```
+/spec  →  /write-plan  →  /execute-plan  →  /compound
+  │              │                │               │
+Spec         Plan doc         Working         Learnings
+artifact     saved to         branch          saved to
+saved to     docs/plans/      merged or       docs/learnings/
+docs/specs/                   PR open         + CLAUDE.md
+```
+
+Each command hands off to the next. You do not run them in isolation.
 
 ## Installation
 
@@ -30,33 +32,57 @@ Requires: Claude Code CLI v2.1.0+, Python 3.8+ (for metrics hooks)
 
 ## Usage
 
-### Spec-driven development
+### Stage 1 — `/spec`
 
-Use `/spec` for any feature work — it adapts. For vague ideas it starts with dialogue; for well-defined tasks it goes straight to codebase analysis.
+Start every feature here. Adapts to how clear the idea is.
 
 ```
 /spec Add email verification to user registration
 /spec I want to improve how we handle errors
 ```
 
-1. (If vague) Asks questions one at a time to clarify intent and explore approaches
-2. Analyzes affected files and existing patterns
+1. (If vague) Asks focused questions to clarify intent and explore approaches
+2. Analyzes affected files and existing patterns in the codebase
 3. Loads company standards (architecture, coding, security)
-4. Generates a structured spec → you review and iterate → approve
-5. Generates an implementation plan → you approve
-6. Executes via standard workflow: git worktree → TDD → code review → verify → finish
+4. Generates a structured spec at `docs/specs/YYYY-MM-DD-description.md` → you review and approve
 
-Specs are saved to `docs/specs/YYYY-MM-DD-description.md` as permanent artifacts.
+**Hands off to `/write-plan` automatically once the spec is approved.**
 
-### Compound learning
+---
 
-After finishing a feature or branch:
+### Stage 2 — `/write-plan`
+
+Turns the approved spec into a bite-sized implementation plan.
+
+- Reads the spec doc and project `CLAUDE.md` for test patterns and commit conventions
+- Produces a plan at `docs/plans/YYYY-MM-DD-feature.md` with exact file paths, full code, and TDD steps
+- Each task is 2–5 minutes: write failing test → implement → verify → commit
+
+**Hands off to `/execute-plan` (separate session) or runs subagent-driven execution in the current session.**
+
+---
+
+### Stage 3 — `/execute-plan`
+
+Executes the plan task by task with review checkpoints.
+
+- Verifies you are in a feature branch worktree (creates one if not)
+- Runs tasks in batches of 3, reports after each batch
+- After all tasks: verifies tests, then presents merge/PR/keep/discard options
+
+**Hands off to `/compound` after the branch is finished.**
+
+---
+
+### Stage 4 — `/compound`
+
+Captures what was learned from the completed cycle.
 
 ```
 /compound
 ```
 
-1. Identifies the recent development cycle (git history, spec, files changed)
+1. Identifies the cycle from git history, spec, and changed files
 2. Proposes learnings by category: patterns, gotchas, tools, process, false starts
 3. You approve each learning
 4. Saves to `docs/learnings/` and updates `CLAUDE.md`
