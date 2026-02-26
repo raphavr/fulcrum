@@ -11,7 +11,7 @@
           },
           {
             "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/metrics-session-start.js",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/metrics_session_start.py",
             "async": true
           }
         ]
@@ -23,7 +23,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/metrics-session-end.js",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/metrics_session_end.py",
             "async": false
           }
         ]
