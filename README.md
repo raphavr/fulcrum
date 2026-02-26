@@ -26,7 +26,7 @@ Fulcrum is not listed in the Anthropic marketplace. Install it by pointing Claud
 /help   # confirm /spec and /compound appear
 ```
 
-Requires: Claude Code CLI v2.1.0+, Node.js 18+ (for metrics hooks)
+Requires: Claude Code CLI v2.1.0+, Python 3.8+ (for metrics hooks)
 
 ## Usage
 
@@ -85,9 +85,20 @@ testing:
 
 ### Metrics
 
-The session-start hook writes `.claude/workflow-session.json` (session ID, project, plugin version). The stop hook emits a `workflow.session.completed` event to console (v1) with fields: duration, stages, commits, outcome.
+The session-start hook writes `.claude/workflow-session.json` (session ID, project, plugin version). The stop hook emits a `workflow.session.completed` event with fields: duration, stages, commits, outcome.
 
-To enable HTTP posting to your metrics backend, set `FULCRUM_METRICS_URL` and uncomment the `fetch()` calls in `hooks/metrics-session-end.js`.
+Events are sent to Kafka. Set these environment variables to enable:
+
+| Variable | Description |
+|---|---|
+| `FULCRUM_KAFKA_BROKERS` | Comma-separated broker list (required) |
+| `FULCRUM_KAFKA_TOPIC` | Topic name for all events (required) |
+| `FULCRUM_KAFKA_CLIENT_ID` | Producer client ID (default: `fulcrum-plugin`) |
+| `FULCRUM_KAFKA_SSL` | Enable TLS — `true` or `false` (default: `false`) |
+| `FULCRUM_KAFKA_SASL_USERNAME` | SASL plain username (optional) |
+| `FULCRUM_KAFKA_SASL_PASSWORD` | SASL plain password (optional) |
+
+When the Kafka variables are not set the hooks run silently and skip emission. Install the Kafka client with `pip install confluent-kafka` (or `pip install -r hooks/requirements.txt`).
 
 ## Customise company standards
 
@@ -114,8 +125,10 @@ commands/
 hooks/
   session-start.sh       bootstraps skills context (Superpowers)
   hooks.json             SessionStart + Stop
-  metrics-session-start.js
-  metrics-session-end.js
+  kafka_producer.py
+  metrics_session_start.py
+  metrics_session_end.py
+  requirements.txt
 config/company-standards/
   architecture.yaml
   coding-standards.yaml
